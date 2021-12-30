@@ -1,76 +1,76 @@
 export const header = {
-  logo: '/assets/img/header-logo.svg',
+  logo: "/assets/img/header-logo2.svg",
 };
 
 export const navItem = [
   {
-    name: 'Home',
-    path: '/',
+    name: "Home",
+    path: "/",
   },
   {
-    name: 'pages',
-    path: '#',
+    name: "pages",
+    path: "#",
     subNav: [
       {
-        name: 'About us',
-        path: '/about',
+        name: "About us",
+        path: "/about",
       },
       {
-        name: 'FAQ',
-        path: '/faq',
+        name: "FAQ",
+        path: "/faq",
       },
       {
-        name: 'My Profile',
-        path: '/profile',
+        name: "My Profile",
+        path: "/profile",
       },
       {
-        name: 'Login',
-        path: '/login',
+        name: "Login",
+        path: "/login",
       },
       {
-        name: 'Registration',
-        path: '/registration',
+        name: "Registration",
+        path: "/registration",
       },
       {
-        name: 'Product',
-        path: '/product',
+        name: "Product",
+        path: "/product",
       },
       {
-        name: 'Post',
-        path: '/blog/2633',
+        name: "Post",
+        path: "/blog/2633",
       },
       {
-        name: 'Checkout',
-        path: '/checkout',
+        name: "Checkout",
+        path: "/checkout",
       },
       {
-        name: '404',
-        path: '/404',
+        name: "404",
+        path: "/404",
       },
       {
-        name: 'Cart',
-        path: '/cart',
+        name: "Cart",
+        path: "/cart",
       },
       {
-        name: 'Wishlist',
-        path: '/wishlist',
+        name: "Wishlist",
+        path: "/wishlist",
       },
     ],
   },
   {
-    name: 'shop',
-    path: '/shop',
+    name: "shop",
+    path: "/shop",
   },
   {
-    name: 'Categories',
-    path: '/categories',
+    name: "Categories",
+    path: "/categories",
   },
   {
-    name: 'blog',
-    path: '/blog',
+    name: "blog",
+    path: "/blog",
   },
   {
-    name: 'contact',
-    path: '/contact',
+    name: "contact",
+    path: "/contact",
   },
 ];

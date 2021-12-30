@@ -14,7 +14,7 @@ export const NewArrivals = () => {
       {/* <!-- BEGIN NEW ARRIVALS --> */}
       <section className="arrivals">
         <SectionTitle
-          subTitle="Cosmetics"
+          //subTitle="Cosmetics"
           title="New arrivals"
           body="Nourish your skin with toxin-free cosmetic products. With the offers that you can’t refuse."
         />

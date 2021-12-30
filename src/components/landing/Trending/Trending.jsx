@@ -68,7 +68,7 @@ export const Trending = () => {
       <section className="trending">
         <div className="trending-content">
           <SectionTitle
-            subTitle="Cosmetics"
+            //subTitle="Cosmetics"
             title="Trending products"
             body="Nourish your skin with toxin-free cosmetic products. With the offers that you can’t refuse."
           />
