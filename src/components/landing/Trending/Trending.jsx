@@ -75,17 +75,16 @@ export const Trending = () => {
           <div className="tab-wrap trending-tabs">
             <ul className="nav-tab-list tabs">
               {filterList.map((item, key) => (
-                <>
+                <div key={key}>
                   {item.parent_id == 0 ? (
                     <li
-                      key={item.id}
                       onClick={() => setFilterItem(item.id)}
                       className={item.id === filterItem ? "active" : ""}
                     >
                       {item.name}
                     </li>
                   ) : null}
-                </>
+                </div>
               ))}
             </ul>
             <div className="products-items">

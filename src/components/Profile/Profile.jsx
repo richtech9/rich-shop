@@ -1,42 +1,44 @@
-import { useState } from 'react';
-import { ProfileAside } from './ProfileAside/ProfileAside';
-import { ProfileOrders } from './ProfileOrders/ProfileOrders';
+import React from "react";
+import { useState } from "react";
+import { ProfileAside } from "./ProfileAside/ProfileAside";
+import { ProfileOrders } from "./ProfileOrders/ProfileOrders";
+import withAuth from "auth/withAuth";
 
-export const Profile = () => {
-  const [activeTab, setActiveTab] = useState('orders');
+const Profile = () => {
+  const [activeTab, setActiveTab] = useState("orders");
   return (
     <>
       {/* <!-- BEGIN PROFILE --> */}
-      <div className='profile'>
-        <div className='wrapper'>
-          <div className='profile-content'>
+      <div className="profile">
+        <div className="wrapper">
+          <div className="profile-content">
             <ProfileAside />
-            <div className='profile-main'>
-              <div className='tab-wrap'>
-                <ul className='nav-tab-list tabs'>
+            <div className="profile-main">
+              <div className="tab-wrap">
+                <ul className="nav-tab-list tabs">
                   <li
-                    onClick={() => setActiveTab('myInfo')}
-                    className={activeTab === 'myInfo' ? 'active' : ''}
+                    onClick={() => setActiveTab("myInfo")}
+                    className={activeTab === "myInfo" ? "active" : ""}
                   >
                     My info
                   </li>
                   <li
-                    onClick={() => setActiveTab('orders')}
-                    className={activeTab === 'orders' ? 'active' : ''}
+                    onClick={() => setActiveTab("orders")}
+                    className={activeTab === "orders" ? "active" : ""}
                   >
                     My orders
                   </li>
                   <li
-                    onClick={() => setActiveTab('wishList')}
-                    className={activeTab === 'wishList' ? 'active' : ''}
+                    onClick={() => setActiveTab("wishList")}
+                    className={activeTab === "wishList" ? "active" : ""}
                   >
                     Wishlist
                   </li>
                 </ul>
 
-                <div className='box-tab-cont'>
-                  {activeTab === 'myInfo' && (
-                    <div className='tab-cont' id='profile-tab_1'>
+                <div className="box-tab-cont">
+                  {activeTab === "myInfo" && (
+                    <div className="tab-cont" id="profile-tab_1">
                       Lorem ipsum dolor sit amet consectetur adipisicing elit.
                       Neque quasi, sit vel exercitationem ea veniam quo
                       asperiores corporis dignissimos quod id. Adipisci libero
@@ -44,10 +46,10 @@ export const Profile = () => {
                     </div>
                   )}
 
-                  {activeTab === 'orders' && <ProfileOrders />}
+                  {activeTab === "orders" && <ProfileOrders />}
 
-                  {activeTab === 'wishList' && (
-                    <div className='tab-cont' id='profile-tab_3'>
+                  {activeTab === "wishList" && (
+                    <div className="tab-cont" id="profile-tab_3">
                       Lorem ipsum dolor sit amet consectetur adipisicing elit.
                       Cumque tempore saepe blanditiis omnis. Reprehenderit
                       officia atque facere tempora, neque quaerat et aliquid
@@ -61,12 +63,14 @@ export const Profile = () => {
           </div>
         </div>
         <img
-          className='promo-video__decor js-img'
-          src='/assets/img/promo-video__decor.jpg'
-          alt=''
+          className="promo-video__decor js-img"
+          src="/assets/img/promo-video__decor.jpg"
+          alt=""
         />
       </div>
       {/* <!-- PROFILE EOF   --> */}
     </>
   );
 };
+
+export default withAuth(Profile);

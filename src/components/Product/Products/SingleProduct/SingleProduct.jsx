@@ -1,10 +1,14 @@
+import { add } from "components/Cart/updateCart";
 import Link from "next/link";
+import { useContext, useState } from "react";
+import AppContext from "storeData/AppContext";
 
 export const SingleProduct = ({
   product,
   onAddToWish,
   onAddToCart,
   addedInCart,
+  addedInWish,
 }) => {
   const {
     name,
@@ -15,6 +19,18 @@ export const SingleProduct = ({
     isNew,
     slug: id,
   } = product;
+  const {
+    state: { cartData },
+    dispatch,
+  } = useContext(AppContext);
+  const [loading, setLoading] = useState(false);
+  const currentProduct = cartData.find((v) => v.product_id == product.id);
+
+  const addCart = async () => {
+    setLoading(true);
+    await add(1, product.variations[0].id, dispatch);
+    setLoading(false);
+  };
   return (
     <>
       {/* <!-- BEING SINGLE PRODUCT ITEM --> */}
@@ -32,15 +48,25 @@ export const SingleProduct = ({
               </a>
             </Link>
             <div className="products-item__hover-options">
-              <button className="addList" onClick={() => onAddToWish(id)}>
-                <i className="icon-heart"></i>
+              <button
+                className="addList"
+                onClick={addedInWish ? null : () => onAddToWish(product)}
+              >
+                <i
+                  className="icon-heart"
+                  style={addedInWish ? { color: "red" } : {}}
+                ></i>
               </button>
               <button
-                disabled={addedInCart}
-                className={`addList ${addedInCart ? "added" : ""}`}
-                onClick={() => onAddToCart(id)}
+                disabled={currentProduct ? true : false}
+                className={`addList ${currentProduct ? "added" : ""}`}
+                onClick={addCart}
               >
-                <i className="icon-cart"></i>
+                {loading ? (
+                  <img src="/assets/img/icons/loading.gif" />
+                ) : (
+                  <i className="icon-cart"></i>
+                )}
               </button>
             </div>
           </div>
@@ -52,7 +78,7 @@ export const SingleProduct = ({
             </a>
           </Link>
           <span className="products-item__cost">
-            <span>{oldPrice && `$${oldPrice}`}</span> ${price}
+            <span>{oldPrice != price ? `$${oldPrice}` : null}</span> ${price}
           </span>
         </div>
       </div>

@@ -23,7 +23,7 @@ const updateCart = (state, payload) => {
 };
 
 const removeCart = (state, id) => {
-  const newData = state.cartData.filter((v) => v.id != id);
+  const newData = state.cartData.filter((v) => v.cart_id != id);
   localStorage.setItem("cartdata", JSON.stringify(newData));
   return { ...state, cartData: newData };
 };
@@ -31,7 +31,7 @@ const removeCart = (state, id) => {
 const increaseQty = (state, id) => {
   const newData = state.cartData.map((data) => {
     if (data.product_id == id) {
-      return { ...data, quantity: data.quantity + 1 };
+      return { ...data, qty: data.qty + 1 };
     }
     return data;
   });
@@ -43,11 +43,11 @@ const decreaseQty = (state, id) => {
   const newData = state.cartData
     .map((data) => {
       if (data.product_id == id) {
-        return { ...data, quantity: data.quantity - 1 };
+        return { ...data, qty: data.qty - 1 };
       }
       return data;
     })
-    .filter((v) => v.quantity != 0);
+    .filter((v) => v.qty != 0);
 
   localStorage.setItem("cartdata", JSON.stringify(newData));
   return { ...state, cartData: newData };

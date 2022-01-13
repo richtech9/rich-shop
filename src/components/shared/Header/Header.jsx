@@ -4,9 +4,12 @@ import { useContext, useEffect, useState } from "react";
 import { Nav } from "./Nav/Nav";
 import { navItem } from "data/data.header";
 import { CartContext } from "pages/_app";
+import AppContext from "storeData/AppContext";
 
 export const Header = () => {
-  const { cart } = useContext(CartContext);
+  const {
+    state: { cartData },
+  } = useContext(AppContext);
   const [promo, setPromo] = useState(true);
   const [fixedNav, setFixedNav] = useState(false);
 
@@ -77,7 +80,7 @@ export const Header = () => {
                 <Link href="/cart">
                   <a>
                     <i className="icon-cart"></i>
-                    <span>{cart.length ?? "0"}</span>
+                    <span>{cartData.length ?? "0"}</span>
                   </a>
                 </Link>
               </li>

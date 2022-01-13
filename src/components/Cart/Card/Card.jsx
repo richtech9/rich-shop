@@ -1,71 +1,87 @@
-import Link from 'next/link';
+import Link from "next/link";
 
-export const Card = ({ cart, onChangeQuantity }) => {
+export const Card = ({ cart, onChangeQuantity, loading }) => {
   const {
     name,
-    image,
-    id,
-    isStocked,
+    thumbnail: image,
+    slug: id,
+    stock: isStocked,
     productNumber,
-    oldPrice,
-    price,
-    quantity,
+    product_id,
+    regular_price: oldPrice,
+    dicounted_price: price,
+    qty: quantity,
   } = cart;
 
   return (
     <>
-      <div className='cart-table__row'>
-        <div className='cart-table__col'>
+      <div className="cart-table__row">
+        <div className="cart-table__col">
           <Link href={`/product/${id}`}>
-            <a className='cart-table__img'>
-              <img src={image} className='js-img' alt='' />
+            <a className="cart-table__img">
+              <img src={image} className="js-img" alt="" />
             </a>
           </Link>
-          <div className='cart-table__info'>
+          <div className="cart-table__info">
             <Link href={`/product/${id}`}>
-              <a className='title5'>{name}</a>
+              <a className="title5">{name}</a>
             </Link>
-            {isStocked && (
-              <span className='cart-table__info-stock'>in stock</span>
-            )}
-            <span className='cart-table__info-num'>SKU: {productNumber}</span>
+            {isStocked ? (
+              <span className="cart-table__info-stock">in stock</span>
+            ) : null}
+            {/* <span className="cart-table__info-num">SKU: {productNumber}</span> */}
           </div>
         </div>
-        <div className='cart-table__col'>
-          {oldPrice ? (
-            <span className='cart-table__price'>
+        <div className="cart-table__col">
+          {oldPrice !== price ? (
+            <span className="cart-table__price">
               <span>${oldPrice}</span>${price}
             </span>
           ) : (
-            <span className='cart-table__price'>${price}</span>
+            <span className="cart-table__price">${price}</span>
           )}
         </div>
-        <div className='cart-table__col'>
-          <div className='cart-table__quantity'>
-            <div className='counter-box'>
-              <span
-                onClick={() => onChangeQuantity('decrement', quantity)}
-                className='counter-link counter-link__prev'
+        <div className="cart-table__col">
+          <div className="cart-table__quantity">
+            <div className="counter-box">
+              <button
+                onClick={() =>
+                  onChangeQuantity("minus", {
+                    type: "DECREASE_QTY",
+                    payload: { id: product_id },
+                  })
+                }
+                disabled={loading.load}
+                className="counter-link counter-link__prev"
               >
-                <i className='icon-arrow'></i>
-              </span>
+                <i className="icon-arrow"></i>
+              </button>
               <input
-                type='text'
-                className='counter-input'
+                type="text"
+                className="counter-input"
                 disabled
                 value={quantity}
               />
-              <span
-                onClick={() => onChangeQuantity('increment', quantity)}
-                className='counter-link counter-link__next'
+              <button
+                onClick={() =>
+                  onChangeQuantity("plus", {
+                    type: "INCREASE_QTY",
+                    payload: { id: product_id },
+                  })
+                }
+                disabled={loading.load}
+                className="counter-link counter-link__next"
               >
-                <i className='icon-arrow'></i>
-              </span>
+                <i className="icon-arrow"></i>
+              </button>
+              {loading.id == id && loading.load ? (
+                <img src="/assets/img/icons/loading.gif" width={25} />
+              ) : null}
             </div>
           </div>
         </div>
-        <div className='cart-table__col'>
-          <span className='cart-table__total'>
+        <div className="cart-table__col">
+          <span className="cart-table__total">
             ${(price * quantity).toFixed(2)}
           </span>
         </div>

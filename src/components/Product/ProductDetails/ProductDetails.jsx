@@ -5,11 +5,19 @@ import socialData from "data/social";
 import { Reviews } from "../Reviews/Reviews";
 import { ReviewFrom } from "../ReviewForm/ReviewFrom";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
+import AppContext from "storeData/AppContext";
+import { add, remove, update } from "components/Cart/updateCart";
 import { CartContext } from "pages/_app";
 
 export const ProductDetails = ({ product, slug }) => {
   const router = useRouter();
   const { cart, setCart } = useContext(CartContext);
+
+  const {
+    state: { whishlist, cartData },
+    dispatch,
+  } = useContext(AppContext);
 
   const socialLinks = [...socialData];
   const products = [...productData];
@@ -35,12 +43,44 @@ export const ProductDetails = ({ product, slug }) => {
   const [nav1, setNav1] = useState();
   const [nav2, setNav2] = useState();
 
-  const handleAddToCart = () => {
-    const newProduct = { ...product, quantity: quantity };
-    setCart([...cart, newProduct]);
+  const [loading, setLoading] = useState(false);
+  const [uloading, setuLoading] = useState(false);
+  const currentProduct = cartData.find((v) => v.product_id == product.id);
+
+  const handleAddToCart = async () => {
+    setLoading(true);
+    await add(quantity, product.variations[0].id, dispatch);
+    setLoading(false);
+  };
+  const removeCart = async () => {
+    setLoading(true);
+    await remove(currentProduct.cart_id, dispatch);
+    setLoading(false);
+    setQuantity(1);
   };
 
+  const addToWhishlist = () => {
+    const payload = {
+      id: product.id,
+      name: product.name,
+      price: product.base_discounted_price,
+      image: product.thumbnail_image,
+      slug: product.slug,
+    };
+    dispatch({ type: "ADD_TO_WHISHLIST", payload });
+    toast.success("Successfully wishlist added!");
+  };
+
+  const inWishlist = Boolean(whishlist.find((v) => v.id == product.id));
+
+  useEffect(() => {
+    if (currentProduct) {
+      setQuantity(currentProduct.qty);
+    }
+  }, [currentProduct]);
+
   if (!product) return <></>;
+
   return (
     <>
       {/* <!-- BEGIN PRODUCT --> */}
@@ -114,7 +154,7 @@ export const ProductDetails = ({ product, slug }) => {
               )}
 
               <span className="product-num">SKU: {product.productNumber}</span>
-              {product.discount ? (
+              {product.base_price != product.base_discounted_price ? (
                 <span className="product-price">
                   <span>${product.base_price}</span>$
                   {product.base_discounted_price}
@@ -160,41 +200,91 @@ export const ProductDetails = ({ product, slug }) => {
                     Quantity:
                   </span>
                   <div className="counter-box">
-                    <span
-                      onClick={() => {
-                        if (quantity > 1) {
-                          setQuantity(quantity - 1);
+                    <button
+                      onClick={async () => {
+                        if (currentProduct) {
+                          setuLoading(true);
+                          await update(
+                            "minus",
+                            {
+                              type: "DECREASE_QTY",
+                              payload: { id: product.id },
+                            },
+                            currentProduct,
+                            dispatch
+                          );
+                          setuLoading(false);
+                        } else {
+                          if (quantity > 1) {
+                            setQuantity(quantity - 1);
+                          }
                         }
                       }}
+                      disabled={uloading}
                       className="counter-link counter-link__prev"
                     >
                       <i className="icon-arrow"></i>
-                    </span>
+                    </button>
                     <input
                       type="text"
                       className="counter-input"
                       disabled
                       value={quantity}
                     />
-                    <span
-                      onClick={() => setQuantity(quantity + 1)}
+                    <button
+                      onClick={async () => {
+                        if (currentProduct) {
+                          setuLoading(true);
+                          await update(
+                            "plus",
+                            {
+                              type: "INCREASE_QTY",
+                              payload: { id: product.id },
+                            },
+                            currentProduct,
+                            dispatch
+                          );
+                          setuLoading(false);
+                        } else {
+                          setQuantity(quantity + 1);
+                        }
+                      }}
+                      disabled={uloading}
                       className="counter-link counter-link__next"
                     >
                       <i className="icon-arrow"></i>
-                    </span>
+                    </button>
+                    {uloading ? (
+                      <img src="/assets/img/icons/loading.gif" width={25} />
+                    ) : null}
                   </div>
                 </div>
               </div>
               <div className="product-buttons">
                 <button
-                  disabled={addedInCart}
-                  onClick={() => handleAddToCart()}
+                  // disabled={currentProduct ? true : false}
+                  onClick={currentProduct ? removeCart : handleAddToCart}
                   className="btn btn-icon"
                 >
-                  <i className="icon-cart"></i> cart
+                  <i className="icon-cart"></i>
+                  {loading ? (
+                    <img src="/assets/img/icons/loading.gif" width={25} />
+                  ) : currentProduct ? (
+                    "remove"
+                  ) : (
+                    "add cart"
+                  )}
                 </button>
-                <button className="btn btn-grey btn-icon">
-                  <i className="icon-heart"></i> wish
+                <button
+                  className="btn btn-grey btn-icon"
+                  disabled={inWishlist}
+                  onClick={addToWhishlist}
+                >
+                  <i
+                    className="icon-heart"
+                    style={inWishlist ? { color: "red" } : {}}
+                  ></i>{" "}
+                  wish
                 </button>
               </div>
             </div>
