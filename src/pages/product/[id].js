@@ -1,8 +1,7 @@
 import { MostViewed } from "components/shared/MostViewed/MostViewed";
 import { ProductDetails } from "components/Product/ProductDetails/ProductDetails";
 import axios from "axios";
-
-const { PublicLayout } = require("layout/PublicLayout");
+import { PublicLayout } from "layout/PublicLayout";
 
 const breadcrumbsData = [
   {
