@@ -1,19 +1,19 @@
-import { Profile } from 'components/Profile/Profile';
-import { PublicLayout } from 'layout/PublicLayout';
+import Profile from "components/Profile/Profile";
+import { PublicLayout } from "layout/PublicLayout";
 
 const breadcrumbsData = [
   {
-    label: 'Home',
-    path: '/',
+    label: "Home",
+    path: "/",
   },
   {
-    label: 'My Profile',
-    path: '/profile',
+    label: "My Profile",
+    path: "/profile",
   },
 ];
 const ProfilePage = () => {
   return (
-    <PublicLayout breadcrumb={breadcrumbsData} breadcrumbTitle='My Profile'>
+    <PublicLayout breadcrumb={breadcrumbsData} breadcrumbTitle="My Profile">
       <Profile />
     </PublicLayout>
   );
