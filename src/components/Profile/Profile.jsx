@@ -1,11 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { ProfileAside } from "./ProfileAside/ProfileAside";
 import { ProfileOrders } from "./ProfileOrders/ProfileOrders";
 import withAuth from "auth/withAuth";
+import AppContext from "storeData/AppContext";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 const Profile = () => {
   const [activeTab, setActiveTab] = useState("orders");
+  const { dispatch } = useContext(AppContext);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const logout = async () => {
+    setLoading(true);
+    const res = await axios.get("auth/logout");
+    if (res.data) {
+      const s = await router.push("/");
+      if (s) {
+        toast.success(res.data.message);
+        dispatch({ type: "LOG_OUT" });
+      }
+    }
+    setLoading(false);
+  };
   return (
     <>
       {/* <!-- BEGIN PROFILE --> */}
@@ -43,6 +62,22 @@ const Profile = () => {
                       Neque quasi, sit vel exercitationem ea veniam quo
                       asperiores corporis dignissimos quod id. Adipisci libero
                       similique a commodi fugiat quibusdam maiores ipsa!
+                      <button
+                        className="btn"
+                        disabled={loading}
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                        onClick={logout}
+                      >
+                        {loading ? (
+                          <img src="/assets/img/icons/loading.gif" width={30} />
+                        ) : (
+                          "Logout"
+                        )}
+                      </button>
                     </div>
                   )}
 

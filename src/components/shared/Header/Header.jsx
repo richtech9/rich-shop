@@ -8,7 +8,7 @@ import AppContext from "storeData/AppContext";
 
 export const Header = () => {
   const {
-    state: { cartData },
+    state: { cartData, user },
   } = useContext(AppContext);
   const [promo, setPromo] = useState(true);
   const [fixedNav, setFixedNav] = useState(false);
@@ -63,9 +63,10 @@ export const Header = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/profile">
+                <Link href={user ? "/profile" : "/login"}>
                   <a>
                     <i className="icon-user"></i>
+                    {user ? user.name : " Login"}
                   </a>
                 </Link>
               </li>

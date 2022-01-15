@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { v1 as uuidv1 } from "uuid";
 
 axios.defaults.baseURL = "https://adminpanel.fasterning.com/api/v1";
+
 export const CartContext = createContext();
 
 const MyApp = ({ Component, pageProps }) => {
@@ -49,6 +50,14 @@ const MyApp = ({ Component, pageProps }) => {
     const uid = localStorage.getItem("uid");
     if (!uid) {
       localStorage.setItem("uid", uuidv1());
+    }
+    if (user) {
+      if (user.id) {
+        axios.defaults.headers = {
+          Authorization: `Bearer ${user.access_token}`,
+        };
+        dispatch({ type: "SET_LOGIN", payload: user });
+      }
     }
     if (cartData) {
       if (cartData.length) {
