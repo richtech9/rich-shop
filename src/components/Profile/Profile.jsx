@@ -10,7 +10,10 @@ import { useRouter } from "next/router";
 
 const Profile = () => {
   const [activeTab, setActiveTab] = useState("orders");
-  const { dispatch } = useContext(AppContext);
+  const {
+    dispatch,
+    state: { user },
+  } = useContext(AppContext);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const logout = async () => {
@@ -59,9 +62,21 @@ const Profile = () => {
                   {activeTab === "myInfo" && (
                     <div className="tab-cont" id="profile-tab_1">
                       Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Neque quasi, sit vel exercitationem ea veniam quo
-                      asperiores corporis dignissimos quod id. Adipisci libero
-                      similique a commodi fugiat quibusdam maiores ipsa!
+                      Sit tempora atque commodi quae cupiditate. Cumque dolore,
+                      distinctio, commodi architecto molestiae velit voluptates
+                      veritatis blanditiis necessitatibus voluptas labore
+                      nostrum voluptatum. Expedita.
+                      {user ? (
+                        <>
+                          <p style={{ marginTop: "20px" }}>
+                            {"Name : " + user.name}
+                          </p>
+                          <p>{"Email : " + user.email}</p>
+                          <p style={{ marginBottom: "20px" }}>
+                            {"Phone : " + user.phone}
+                          </p>
+                        </>
+                      ) : null}
                       <button
                         className="btn"
                         disabled={loading}
