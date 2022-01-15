@@ -7,6 +7,7 @@ import AppContext from "storeData/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import Address from "./Address/Address";
 
 const Profile = () => {
   const [activeTab, setActiveTab] = useState("orders");
@@ -43,6 +44,12 @@ const Profile = () => {
                     className={activeTab === "myInfo" ? "active" : ""}
                   >
                     My info
+                  </li>
+                  <li
+                    onClick={() => setActiveTab("address")}
+                    className={activeTab === "address" ? "active" : ""}
+                  >
+                    Addresses
                   </li>
                   <li
                     onClick={() => setActiveTab("orders")}
@@ -96,6 +103,7 @@ const Profile = () => {
                     </div>
                   )}
 
+                  {activeTab === "address" && <Address />}
                   {activeTab === "orders" && <ProfileOrders />}
 
                   {activeTab === "wishList" && (

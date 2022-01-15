@@ -1,5 +1,5 @@
-import { Breadcrumb } from 'components/shared/Breadcrumb/Breadcrumb';
-import { Layout } from './Layout';
+import { Breadcrumb } from "components/shared/Breadcrumb/Breadcrumb";
+import { Layout } from "./Layout";
 
 export const PublicLayout = ({
   children,
@@ -14,7 +14,7 @@ export const PublicLayout = ({
         title={breadcrumbTitle}
         description={description}
       />
-      <>{children}</>
+      <div>{children}</div>
     </Layout>
   );
 };
