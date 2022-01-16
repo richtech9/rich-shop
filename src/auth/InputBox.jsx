@@ -10,6 +10,7 @@ export default function InputBox({ type, name, label, error }) {
         name={name}
         id={name}
         placeholder={label}
+        required
         style={
           error ? (error.type == name ? { borderColor: "red" } : null) : null
         }

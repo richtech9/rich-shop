@@ -1,23 +1,23 @@
-import { Checkout } from 'components/Checkout/Checkout';
-import { PublicLayout } from 'layout/PublicLayout';
+import Checkout from "components/Checkout/Checkout";
+import { PublicLayout } from "layout/PublicLayout";
 
 const breadcrumbsData = [
   {
-    label: 'Home',
-    path: '/',
+    label: "Home",
+    path: "/",
   },
   {
-    label: 'Shop',
-    path: '/shop',
+    label: "Shop",
+    path: "/shop",
   },
   {
-    label: 'Checkout',
-    path: '/checkout',
+    label: "Checkout",
+    path: "/checkout",
   },
 ];
 const CheckoutPage = () => {
   return (
-    <PublicLayout breadcrumb={breadcrumbsData} breadcrumbTitle='Checkout'>
+    <PublicLayout breadcrumb={breadcrumbsData} breadcrumbTitle="Checkout">
       <Checkout />
     </PublicLayout>
   );

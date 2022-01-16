@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { ProfileAside } from "./ProfileAside/ProfileAside";
 import { ProfileOrders } from "./ProfileOrders/ProfileOrders";
@@ -8,6 +8,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import Address from "./Address/Address";
+import AddressAdd from "./Address/AddressAdd";
 
 const Profile = () => {
   const [activeTab, setActiveTab] = useState("orders");
@@ -29,6 +30,12 @@ const Profile = () => {
     }
     setLoading(false);
   };
+
+  useEffect(() => {
+    if (router.query.tab) {
+      setActiveTab(router.query.tab);
+    }
+  }, []);
   return (
     <>
       {/* <!-- BEGIN PROFILE --> */}
@@ -47,7 +54,11 @@ const Profile = () => {
                   </li>
                   <li
                     onClick={() => setActiveTab("address")}
-                    className={activeTab === "address" ? "active" : ""}
+                    className={
+                      activeTab === "address" || activeTab === "addressadd"
+                        ? "active"
+                        : ""
+                    }
                   >
                     Addresses
                   </li>
@@ -103,8 +114,13 @@ const Profile = () => {
                     </div>
                   )}
 
-                  {activeTab === "address" && <Address />}
+                  {activeTab === "address" && (
+                    <Address setActiveTab={setActiveTab} />
+                  )}
                   {activeTab === "orders" && <ProfileOrders />}
+                  {activeTab === "addressadd" && (
+                    <AddressAdd setActiveTab={setActiveTab} />
+                  )}
 
                   {activeTab === "wishList" && (
                     <div className="tab-cont" id="profile-tab_3">
