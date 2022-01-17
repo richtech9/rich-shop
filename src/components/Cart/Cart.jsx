@@ -5,6 +5,8 @@ import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import AppContext from "storeData/AppContext";
 import { update } from "./updateCart";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 export const Cart = () => {
   const { cart, setCart } = useContext(CartContext);
@@ -15,7 +17,7 @@ export const Cart = () => {
   } = useContext(AppContext);
   const [count, setCount] = useState(0);
   const socialLinks = [...socialData];
-
+  const router = useRouter();
   const total = cartData.reduce(
     (total, item) => total + Number(item.dicounted_price) * Number(item.qty),
     0
@@ -35,7 +37,7 @@ export const Cart = () => {
 
   useEffect(() => {
     setCart(cart);
-  }, [cart, count]);
+  }, [cart, count, cartData]);
 
   return (
     <>
@@ -120,16 +122,28 @@ export const Cart = () => {
                 <span>${total.toFixed(2)}</span>
               </div>
               <Link href="/checkout">
-                <a className="btn">Checkout</a>
+                <a
+                  className="btn"
+                  onClick={() => {
+                    if (!cartData.length) {
+                      toast.warning(
+                        "Your cart is empty, please add some product!"
+                      );
+                      router.push("/shop");
+                    }
+                  }}
+                >
+                  Checkout
+                </a>
               </Link>
             </div>
           </div>
         </div>
-        <img
+        {/* <img
           className="promo-video__decor js-img"
           src="assets/img/promo-video__decor.jpg"
           alt=""
-        />
+        /> */}
       </div>
       {/* <!-- CART EOF   --> */}
     </>

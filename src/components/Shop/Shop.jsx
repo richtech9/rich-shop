@@ -128,8 +128,8 @@ export const Shop = () => {
             <div className="shop-main">
               <div className="shop-main__filter">
                 <div className="shop-main__checkboxes">
-                  <label className="checkbox-box">
-                    <input
+                  {/* <label className="checkbox-box">
+                     <input
                       checked={filter.isSale}
                       onChange={() =>
                         setFilter({ ...filter, isSale: !filter.isSale })
@@ -149,15 +149,15 @@ export const Shop = () => {
                     />
                     <span className="checkmark"></span>
                     NEW
-                  </label>
+                  </label> */}
                 </div>
                 <div className="shop-main__select">
-                  <Dropdown
+                  {/* <Dropdown
                     options={options}
                     className="react-dropdown"
                     onChange={(option) => handleSort(option.value)}
                     value={options[0]}
-                  />
+                  /> */}
                 </div>
               </div>
               <div className="shop-main__items">

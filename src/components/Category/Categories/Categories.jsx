@@ -5,11 +5,11 @@ export const Categories = ({ categories, isParent = true }) => {
     <>
       {/* <!-- BEGIN  CATEGORIES --> */}
       {categories.map((category) => (
-        <div key={category.id}>
+        <>
           {category.parent_id == 0 || !isParent ? (
             <Card category={category} />
           ) : null}
-        </div>
+        </>
       ))}
       {/* <!--  CATEGORIES EOF   --> */}
     </>

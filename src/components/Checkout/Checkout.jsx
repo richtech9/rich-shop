@@ -185,10 +185,6 @@ const Checkout = () => {
   }, [session_id, canceled]);
 
   useEffect(() => {
-    if (!cartData.length) {
-      toast.warning("Your cart is empty, please add some product!");
-      router.push("/");
-    }
     if (user) {
       getAllAddress();
     }
@@ -259,11 +255,11 @@ const Checkout = () => {
             </div>
           </div>
         </div>
-        <img
+        {/* <img
           className="promo-video__decor js-img"
           src="/assets/img/promo-video__decor.jpg"
           alt=""
-        />
+        /> */}
       </div>
       {/* <!-- CHECKOUT EOF   --> */}
     </>

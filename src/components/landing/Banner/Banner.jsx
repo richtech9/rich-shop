@@ -1,31 +1,48 @@
-import Link from "next/link";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import Slider from "react-slick";
 
 export const Banner = () => {
+  const [sliders, setSliders] = useState([]);
+  const getSlider = async () => {
+    const res = await axios.get("setting/home/sliders");
+    if (res.data.success) {
+      setSliders(res.data.data.one);
+    }
+  };
+
+  const settings = {
+    dots: false,
+
+    infinite: true,
+    arrows: false,
+    speed: 300,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    lazyLoad: "progressive",
+  };
+
+  useEffect(() => {
+    getSlider();
+  }, []);
   return (
     <>
-      {/* <!-- BEGIN MAIN BLOCK --> */}
-      <div className="main-block load-bg">
-        <div className="wrapper">
-          <div className="main-block__content">
-            {/* <span className='saint-text'>Professional</span> */}
-            <h1 className="main-text">Beauty &amp; Care</h1>
-            <p>
-              Nourish your skin with toxin-free cosmetic products. With the
-              offers that you can’t refuse.
-            </p>
-
-            <Link href="/shop">
-              <a className="btn">Shop now</a>
-            </Link>
-          </div>
-        </div>
-        <img
-          className="main-block__decor"
-          src="/assets/img/main-block-decor.png"
-          alt=""
-        />
-      </div>
-      {/* <!-- MAIN BLOCK EOF --> */}
+      {sliders.length ? (
+        <Slider {...settings}>
+          {sliders.map((v) => (
+            <div
+              className="main-block load-bg"
+              key={v.img}
+              //style={{ backgroundImage: `url(${v.img})` }}
+            >
+              <img src={v.img} alt="slider image" style={{ width: "100%" }} />
+            </div>
+          ))}
+        </Slider>
+      ) : (
+        <div className="main-block load-bg"></div>
+      )}
     </>
   );
 };
