@@ -77,6 +77,11 @@ export const ProductDetails = ({ product, slug }) => {
     if (currentProduct) {
       setQuantity(currentProduct.qty);
     }
+    console.log(product);
+    if (!product.stock) {
+      router.push("/");
+      toast.error("Product Stock Out!");
+    }
   }, [currentProduct]);
 
   if (!product) return <></>;

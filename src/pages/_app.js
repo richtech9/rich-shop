@@ -25,6 +25,7 @@ const MyApp = ({ Component, pageProps }) => {
         const category = res.data.rootCategories.data;
         const allProducts = res.data.products.data;
         if (category && allProducts) {
+          console.log(allProducts);
           dispatch({
             type: "GET_ALL_CATEGORY_AND_PRODUCTS",
             payload: { category, allProducts },

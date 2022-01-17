@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { useContext, useState } from "react";
+import AppContext from "storeData/AppContext";
+import { remove } from "../updateCart";
 
 export const Card = ({ cart, onChangeQuantity, loading }) => {
   const {
@@ -11,8 +14,9 @@ export const Card = ({ cart, onChangeQuantity, loading }) => {
     regular_price: oldPrice,
     dicounted_price: price,
     qty: quantity,
+    cart_id,
   } = cart;
-
+  const { dispatch } = useContext(AppContext);
   return (
     <>
       <div className="cart-table__row">
@@ -84,6 +88,19 @@ export const Card = ({ cart, onChangeQuantity, loading }) => {
           <span className="cart-table__total">
             ${(price * quantity).toFixed(2)}
           </span>
+          <button
+            onClick={() => remove(cart_id, dispatch)}
+            className="btn"
+            style={{
+              height: "30px",
+              padding: "0 8px",
+              lineHeight: "30px",
+              fontSize: "12px",
+              marginLeft: "10px",
+            }}
+          >
+            X
+          </button>
         </div>
       </div>
     </>

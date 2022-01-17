@@ -1,44 +1,47 @@
 export const Card = ({ order, index, onCollapse, active }) => {
-  const { date, deliveryAddress, amount, status, orderItems } = order;
+  const {
+    date,
+    payment_type,
+    shipping_address: v,
+    grand_total,
+    delivery_status,
+    products: { data },
+  } = order;
 
   return (
     <>
-      <div className={`profile-orders__item ${active === index && 'active'}`}>
-        <div className='profile-orders__row'>
-          <div className='profile-orders__col'>
-            <span className='profile-orders__col-mob'>date</span>
-            <span className='profile-orders__item-date'>{date}</span>
+      <div className={`profile-orders__item ${active === index && "active"}`}>
+        <div className="profile-orders__row">
+          <div className="profile-orders__col">
+            <span className="profile-orders__col-mob">date</span>
+            <span className="profile-orders__item-date">{date}</span>
           </div>
-          <div className='profile-orders__col'>
-            <span className='profile-orders__col-mob'>Delivery address</span>
-            <span className='profile-orders__item-addr'>{deliveryAddress}</span>
+          <div className="profile-orders__col">
+            <span className="profile-orders__col-mob">Delivery address</span>
+            <span className="profile-orders__item-addr">{`${v.phone} - ${v.address}, ${v.city} - ${v.state}, ${v.postal_code}, ${v.country}`}</span>
           </div>
-          <div className='profile-orders__col'>
-            <span className='profile-orders__col-mob'>amount</span>
-            <span className='profile-orders__item-price'>${amount}</span>
+          <div className="profile-orders__col">
+            <span className="profile-orders__col-mob">amount</span>
+            <span className="profile-orders__item-price">${grand_total}</span>
           </div>
-          <div className='profile-orders__col'>
-            <span className='profile-orders__col-mob'>Status</span>
+          <div className="profile-orders__col">
+            <span className="profile-orders__col-mob">Status</span>
             <span
               className={`profile-orders__col-${
-                status.delivered ? 'delivered' : 'onway'
+                delivery_status == "delivered" ? "delivered" : "onway"
               }`}
             >
-              {status.onWay
-                ? 'on it’s way'
-                : status.delivered
-                ? 'DELIVERED'
-                : null}
+              {delivery_status}
             </span>
             <span
               onClick={() => onCollapse(index)}
-              className='profile-orders__col-btn'
+              className="profile-orders__col-btn"
             ></span>
           </div>
         </div>
-        <div className='profile-orders__content'>
+        <div className="profile-orders__content">
           <ul>
-            {orderItems.map((item, index) => (
+            {data.map((item, index) => (
               <li key={index}>
                 {item.name}
                 <span>${item.price}</span>
@@ -46,7 +49,7 @@ export const Card = ({ order, index, onCollapse, active }) => {
             ))}
             <li>
               Payment Methods:
-              <span>Сredit card: **** **** **** 1633</span>
+              <span>{payment_type}</span>
             </li>
           </ul>
         </div>

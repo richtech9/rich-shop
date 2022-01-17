@@ -1,18 +1,23 @@
 import productData from "data/product/product";
 import { CartContext } from "pages/_app";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import AppContext from "storeData/AppContext";
 import { Card } from "./Card/Card";
 
 export const CheckoutOrders = ({ dcost, loading }) => {
   const { cart } = useContext(CartContext);
+  const [info, setInfo] = useState({ info: 0, total: 0 });
   const {
     state: { cartData },
   } = useContext(AppContext);
-  const total = cartData.reduce(
-    (total, item) => total + Number(item.dicounted_price) * Number(item.qty),
-    0
-  );
+
+  useEffect(() => {
+    const total = cartData.reduce(
+      (total, item) => total + Number(item.dicounted_price) * Number(item.qty),
+      0
+    );
+    setInfo({ dcost, total });
+  }, [dcost]);
 
   return (
     <>
@@ -25,7 +30,7 @@ export const CheckoutOrders = ({ dcost, loading }) => {
       <div className="cart-bottom__total">
         <div className="cart-bottom__total-goods">
           Goods on
-          <span>${total.toFixed(2)}</span>
+          <span>${info.total.toFixed(2)}</span>
         </div>
         <div className="cart-bottom__total-promo">
           Discount on promo code
@@ -38,12 +43,12 @@ export const CheckoutOrders = ({ dcost, loading }) => {
               <img src="/assets/img/icons/loading.gif" width={20} />
             </span>
           ) : (
-            <span>${dcost}</span>
+            <span>${info.dcost}</span>
           )}
         </div>
         <div className="cart-bottom__total-num">
           total:
-          <span>${(total + dcost).toFixed(2)}</span>
+          <span>${(info.total + info.dcost).toFixed(2)}</span>
         </div>
       </div>
     </>

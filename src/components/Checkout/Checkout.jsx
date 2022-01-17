@@ -8,6 +8,17 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import AppContext from "storeData/AppContext";
+import { loadStripe } from "@stripe/stripe-js";
+
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+let stripePromise = null;
+const getStripe = () => {
+  if (!stripePromise) {
+    stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+  }
+  return stripePromise;
+};
 
 const detailBlocks = [
   {
@@ -30,7 +41,8 @@ const detailBlocks = [
 const Checkout = () => {
   const [activeStep, setActiveStep] = useState(2);
   const {
-    state: { cartData },
+    state: { cartData, user },
+    dispatch,
   } = useContext(AppContext);
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -40,12 +52,14 @@ const Checkout = () => {
   };
 
   const router = useRouter();
+  const { session_id, canceled, aid } = router.query;
 
-  const [loading, setdLoading] = useState(false);
+  const [loading, setdLoading] = useState({ type: "all", load: true });
+  const [fullLoading, setFullloading] = useState(false);
   const [address, setAddress] = useState(null);
   const [addressid, setAddressid] = useState(null);
   const [dcost, setDcost] = useState(0);
-
+  const [orderId, setOrderId] = useState(null);
   const getDeliveryCost = async (id) => {
     setdLoading({ type: "dc", load: true });
     try {
@@ -85,7 +99,7 @@ const Checkout = () => {
     setdLoading({ type: "add", load: false });
   };
 
-  const confrimOrder = async () => {
+  const sendOrder = async (online) => {
     const cart_item_ids = [];
     cartData.map((v) => {
       cart_item_ids.push(v.cart_id);
@@ -93,20 +107,92 @@ const Checkout = () => {
     try {
       const res = await axios.post("checkout/order/store", {
         cart_item_ids,
-        shipping_address_id: addressid,
-        billing_address_id: addressid,
+        shipping_address_id: addressid ? addressid : aid,
+        billing_address_id: addressid ? addressid : aid,
         delivery_type: "standard",
-        payment_type: "cash_on_delivery",
+        payment_type: online ? "stripe" : "cash_on_delivery",
       });
       console.log(res);
+      if (res.data.success) {
+        setOrderId(res.data.order_code);
+        toast.success(res.data.message);
+        dispatch({ type: "SET_CART_DATA", payload: [] });
+        localStorage.removeItem("cartdata");
+        setActiveStep(3);
+      } else {
+        router.push("/cart");
+        toast.warning(res.data.message);
+      }
     } catch (error) {
       console.log(error);
     }
   };
+  const confrimOrder = async (isPay = false) => {
+    if (isPay) {
+      const lineItems = [];
+      cartData.map((v) => {
+        lineItems.push({
+          price_data: {
+            currency: "usd",
+            product_data: {
+              name: v.name,
+              images: [v.thumbnail],
+            },
+            unit_amount: v.dicounted_price * 100,
+          },
+          quantity: v.qty,
+        });
+      });
+      const body = { aid: addressid, lineItems };
+      const res = await fetch("/api/checkout_sessions", {
+        method: "post",
+        body: JSON.stringify(body),
+      });
+      const data = await res.json();
+
+      const stripe = await getStripe();
+      await stripe.redirectToCheckout({ sessionId: data.id });
+    } else {
+      sendOrder();
+    }
+  };
 
   useEffect(() => {
-    getAllAddress();
-  }, []);
+    // Check to see if this is a redirect back from Checkout
+
+    if (session_id) {
+      fetch(`/api/checkout_sessions/${session_id}`)
+        .then((v) => v.json())
+        .then(async (data) => {
+          if (data.payment_status == "paid" && data.status == "complete") {
+            setFullloading(true);
+            await sendOrder(true);
+            setFullloading(false);
+          } else {
+            toast.error("Something wrong try again!");
+          }
+        })
+        .catch((e) => toast.error("Something wrong try again!"));
+      console.log("Order placed! You will receive an email confirmation.");
+    }
+
+    if (canceled) {
+      console.log(
+        "Order canceled -- continue to shop around and checkout when you’re ready."
+      );
+      toast.error("Something wrong try again!");
+    }
+  }, [session_id, canceled]);
+
+  useEffect(() => {
+    if (!cartData.length) {
+      toast.warning("Your cart is empty, please add some product!");
+      router.push("/");
+    }
+    if (user) {
+      getAllAddress();
+    }
+  }, [user]);
 
   return (
     <>
@@ -158,10 +244,11 @@ const Checkout = () => {
                       loading={loading}
                       address={address}
                       confrimOrder={confrimOrder}
+                      fullLoading={fullLoading}
                     />
                   );
                 case 3:
-                  return <CheckoutStep3 />;
+                  return <CheckoutStep3 orderId={orderId} />;
 
                 default:
                   return null;
