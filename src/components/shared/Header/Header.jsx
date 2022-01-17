@@ -89,10 +89,16 @@ export const Header = () => {
             </ul>
           </div>
 
-          <div className="btn-menu js-btn-menu">
-            {[1, 2, 3].map((i) => (
+          <div className="js-btn-menu">
+            {/* {[1, 2, 3].map((i) => (
               <span key={i}>&nbsp;</span>
-            ))}
+            ))} */}
+            <Link href="/cart">
+              <a>
+                <i className="icon-cart"></i>
+                <span>{cartData.length ?? "0"}</span>
+              </a>
+            </Link>
           </div>
         </div>
       </header>
