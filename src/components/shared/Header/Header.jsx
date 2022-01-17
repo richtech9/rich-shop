@@ -12,6 +12,7 @@ export const Header = () => {
     state: { cartData, user },
   } = useContext(AppContext);
   const [promo, setPromo] = useState(true);
+  const [path, setPath] = useState(false);
   const [fixedNav, setFixedNav] = useState(false);
   const router = useRouter();
   // For Fixed nav
@@ -30,6 +31,21 @@ export const Header = () => {
       setFixedNav(false);
     }
   };
+  useEffect(() => {
+    const allpath = ["/", "/shop", "/about", "/profile"];
+    let isPath = false;
+    allpath.map((v) => {
+      if (v == router.pathname) {
+        isPath = true;
+      }
+    });
+
+    if (isPath) {
+      setPath(false);
+    } else {
+      setPath(true);
+    }
+  });
   return (
     <>
       {/* <!-- BEGIN HEADER --> */}
@@ -113,30 +129,30 @@ export const Header = () => {
             >
               <ul className="m-menu">
                 <li
-                  className={"/" === router.pathname ? "active" : ""}
+                  className={"/" === router.pathname ? `active` : ``}
                   onClick={() => router.push("/")}
                 >
                   <i class="far fa-home"></i>
                 </li>
                 <li
-                  className={"/about" === router.pathname ? "active" : ""}
+                  className={"/about" === router.pathname ? "active" : ``}
                   onClick={() => router.push("/about")}
                 >
                   <i class="far fa-info"></i>
                 </li>
                 <li
-                  className={"/shop" === router.pathname ? "active" : ""}
+                  className={"/shop" === router.pathname ? "active" : ``}
                   onClick={() => router.push("/shop")}
                 >
                   <i class="far fa-address-book"></i>
                 </li>
                 <li
-                  className={"/profile" === router.pathname ? "active" : ""}
+                  className={"/profile" === router.pathname ? "active" : ``}
                   onClick={() => router.push("/profile")}
                 >
                   <i class="far fa-user"></i>
                 </li>
-                <div class="indicator"></div>
+                <div class={path ? "" : "indicator"}></div>
               </ul>
             </div>
           </div>

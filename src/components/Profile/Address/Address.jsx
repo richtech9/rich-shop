@@ -156,7 +156,7 @@ function Address({ setActiveTab }) {
                           style={{
                             height: "40px",
                             padding: "0 10px",
-                            lineHeight: "40px",
+                            lineHeight: "18px",
                             fontSize: "12px",
                             marginRight: "10px",
                             display: "flex",
