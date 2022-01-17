@@ -5,6 +5,7 @@ import { Nav } from "./Nav/Nav";
 import { navItem } from "data/data.header";
 import { CartContext } from "pages/_app";
 import AppContext from "storeData/AppContext";
+import { useRouter } from "next/router";
 
 export const Header = () => {
   const {
@@ -12,7 +13,7 @@ export const Header = () => {
   } = useContext(AppContext);
   const [promo, setPromo] = useState(true);
   const [fixedNav, setFixedNav] = useState(false);
-
+  const router = useRouter();
   // For Fixed nav
   useEffect(() => {
     window.addEventListener("scroll", isSticky);
@@ -99,6 +100,45 @@ export const Header = () => {
                 <span>{cartData.length ?? "0"}</span>
               </a>
             </Link>
+          </div>
+          <div className="bottom-menu">
+            <div
+              style={{
+                background: "#d05278",
+                borderRadius: "35px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <ul className="m-menu">
+                <li
+                  className={"/" === router.pathname ? "active" : ""}
+                  onClick={() => router.push("/")}
+                >
+                  <i class="far fa-home"></i>
+                </li>
+                <li
+                  className={"/about" === router.pathname ? "active" : ""}
+                  onClick={() => router.push("/about")}
+                >
+                  <i class="far fa-info"></i>
+                </li>
+                <li
+                  className={"/shop" === router.pathname ? "active" : ""}
+                  onClick={() => router.push("/shop")}
+                >
+                  <i class="far fa-address-book"></i>
+                </li>
+                <li
+                  className={"/profile" === router.pathname ? "active" : ""}
+                  onClick={() => router.push("/profile")}
+                >
+                  <i class="far fa-user"></i>
+                </li>
+                <div class="indicator"></div>
+              </ul>
+            </div>
           </div>
         </div>
       </header>

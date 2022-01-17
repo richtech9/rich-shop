@@ -187,7 +187,9 @@ header {
     }
   }
 }
-
+.js-btn-menu {
+  display: none;
+}
 .btn-menu {
   color: #222222;
   cursor: pointer;
@@ -238,7 +240,13 @@ header {
     }
   }
 }
-
+.bottom-menu {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
 @media screen and (max-width: 1600px) {
   .header-logo {
     min-width: 110px;
@@ -299,7 +307,10 @@ header {
 }
 
 @media screen and (max-width: 767px) {
-  .btn-menu {
+  .js-btn-menu {
+    display: block;
+  }
+  .bottom-menu {
     display: block;
   }
   .header-content {
