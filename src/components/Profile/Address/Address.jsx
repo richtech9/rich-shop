@@ -96,7 +96,7 @@ function Address({ setActiveTab }) {
       <div className="profile-orders" style={{ marginTop: "50px" }}>
         {loading.load && loading.type == "all" ? (
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <img src="/assets/img/icons/loading.gif" width={50} />
+            <img src="/assets/img/icons/loading.gif" width={250} />
           </div>
         ) : (
           <>

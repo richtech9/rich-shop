@@ -14,6 +14,7 @@ footer {
 .footer {
   background: #222222;
   z-index: 1;
+  margin-top: 10em;
   padding-bottom: 16px;
   &-top {
     padding: 60px 0 57px;
@@ -97,7 +98,7 @@ footer {
         text-transform: capitalize;
         color: #ffffff;
         margin-bottom: 24px;
-        font-family: 'Tenor Sans';
+        font-family: "Tenor Sans";
       }
       ul {
         li {
@@ -119,8 +120,8 @@ footer {
               left: 0;
               top: 50%;
               transform: translateY(-50%);
-              font-family: 'icomoon';
-              content: '\e918';
+              font-family: "icomoon";
+              content: "\e918";
               color: #bbb;
               font-size: 8px;
             }

@@ -33,7 +33,7 @@ export const ProfileOrders = () => {
       <div className="profile-orders">
         {loading ? (
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <img src="/assets/img/icons/loading.gif" width={50} />
+            <img src="/assets/img/icons/loading.gif" width={250} />
           </div>
         ) : (
           <>

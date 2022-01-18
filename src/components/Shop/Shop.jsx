@@ -90,7 +90,12 @@ export const Shop = () => {
                 <ul>
                   {category.map((v) => (
                     <li key={v.id} onClick={() => setFilterItem(v.id)}>
-                      <a style={{ cursor: "pointer" }}>{v.name}</a>
+                      <a
+                        style={{ cursor: "pointer" }}
+                        className={v.id == filterItem ? "active" : ""}
+                      >
+                        {v.name}
+                      </a>
                     </li>
                   ))}
                 </ul>

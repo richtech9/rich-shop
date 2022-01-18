@@ -290,7 +290,7 @@ export const ProductDetails = ({ product, slug }) => {
                   onClick={currentProduct ? removeCart : handleAddToCart}
                   className="btn btn-icon"
                 >
-                  <i className="icon-cart"></i>
+                  <i className="fas fa-shopping-bag"></i>
                   {loading ? (
                     <img src="/assets/img/icons/loading.gif" width={25} />
                   ) : currentProduct ? (

@@ -71,7 +71,7 @@ export const navItem = [
     path: "/categories",
   },
   {
-    name: "About us",
+    name: "About",
     path: "/about",
   },
   {

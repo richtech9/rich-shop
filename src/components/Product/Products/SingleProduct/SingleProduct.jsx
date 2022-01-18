@@ -69,7 +69,7 @@ export const SingleProduct = ({
               {loading ? (
                 <img src="/assets/img/icons/loading.gif" />
               ) : (
-                <i className="icon-cart"></i>
+                <i className="fas fa-shopping-bag"></i>
               )}
             </button>
           </div>

@@ -64,7 +64,7 @@ export const Header = () => {
           <div className="header-logo">
             <Link href="/">
               <a>
-                <img src={header.logo} alt="" width={250} />
+                <img src={header.logo} alt="" width={240} />
               </a>
             </Link>
           </div>
@@ -73,13 +73,13 @@ export const Header = () => {
             <Nav navItem={navItem} />
             {/* header options */}
             <ul className="header-options">
-              <li>
+              {/* <li>
                 <Link href="/faq">
                   <a>
                     <i className="icon-search"></i>
                   </a>
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link href={user ? "/profile" : "/login"}>
                   <a>
@@ -98,7 +98,7 @@ export const Header = () => {
               <li>
                 <Link href="/cart">
                   <a>
-                    <i className="icon-cart"></i>
+                    <i className="fas fa-shopping-bag"></i>
                     <span>{cartData.length ?? "0"}</span>
                   </a>
                 </Link>
@@ -106,7 +106,7 @@ export const Header = () => {
             </ul>
           </div>
 
-          <div className="js-btn-menu">
+          <div className="js-btn-menu" style={{ position: "relative" }}>
             {/* {[1, 2, 3].map((i) => (
               <span key={i}>&nbsp;</span>
             ))} */}
@@ -118,8 +118,25 @@ export const Header = () => {
                     : { color: "#333", fontSize: "24px" }
                 }
               >
-                <i className="icon-cart"></i>
-                <span style={{ fontSize: "14px" }}>
+                <i className="fas fa-shopping-bag"></i>
+                <span
+                  style={{
+                    width: "22px",
+                    height: "22px",
+                    borderRadius: "50%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    background: "#ff71c8",
+                    fontFamily: '"Montserrat"',
+                    fontWeight: "700",
+                    fontSize: "12px",
+                    color: "#fff",
+                    position: "absolute",
+                    top: "-10px",
+                    right: "-10px",
+                  }}
+                >
                   {cartData.length ?? "0"}
                 </span>
               </a>
@@ -128,7 +145,7 @@ export const Header = () => {
           <div className="bottom-menu">
             <div
               style={{
-                //background: "#d05278",
+                //background: "#ff71c8",
                 //borderRadius: "35px",
                 boxShadow: "-2px -2px 14px -4px rgba(0,0,0,0.25)",
                 background: "#fff",
@@ -139,22 +156,23 @@ export const Header = () => {
             >
               <ul className="m-menu">
                 <li
-                  className={"/" === router.pathname ? `active` : ``}
-                  onClick={() => router.push("/")}
-                >
-                  <i className="far fa-home"></i>
-                </li>
-                <li
                   className={"/about" === router.pathname ? "active" : ``}
                   onClick={() => router.push("/about")}
                 >
-                  <i className="far fa-address-book"></i>
+                  <i class="fal fa-users"></i>
                 </li>
+
                 <li
                   className={"/shop" === router.pathname ? "active" : ``}
                   onClick={() => router.push("/shop")}
                 >
-                  <i className="fas fa-store-alt"></i>
+                  <i class="far fa-store"></i>
+                </li>
+                <li
+                  className={"/" === router.pathname ? `active` : ``}
+                  onClick={() => router.push("/")}
+                >
+                  <i className="far fa-home"></i>
                 </li>
                 <li
                   className={"/wishlist" === router.pathname ? "active" : ``}

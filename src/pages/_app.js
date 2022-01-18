@@ -75,7 +75,7 @@ const MyApp = ({ Component, pageProps }) => {
     <AppContext.Provider value={{ state, dispatch, loading }}>
       <CartContext.Provider value={{ cart, setCart }}>
         <NextNProgress
-          color="#d05278"
+          color="#ff71c8"
           startPosition={0.3}
           stopDelayMs={200}
           height={3}
