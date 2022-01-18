@@ -7053,8 +7053,9 @@ ul.m-menu {
   position: relative;
   display: flex;
   padding: 15px 5px;
-  background: rgba(208, 82, 120, 1);
-  border-radius: 35px;
+  //background: rgba(208, 82, 120, 1);
+  background: #fff;
+  //border-radius: 35px;
   z-index: 2;
 }
 ul.m-menu li {
@@ -7071,7 +7072,7 @@ ul.m-menu li:not(.active):hover {
 
 ul.m-menu li::before {
   font-size: 0.7rem;
-  color: #fff;
+  color: #333;
   position: absolute;
   bottom: -20px;
   left: 50%;
@@ -7090,6 +7091,9 @@ ul.m-menu li:nth-child(3)::before {
   content: "Shop";
 }
 ul.m-menu li:nth-child(4)::before {
+  content: "Wishlist";
+}
+ul.m-menu li:nth-child(5)::before {
   content: "Profile";
 }
 ul.m-menu li.active::before {
@@ -7114,32 +7118,32 @@ ul.m-menu .indicator {
   left: 20px;
   z-index: -1;
   transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  border: 3px solid white;
+  border: 3px solid #d05278;
 }
-ul.m-menu .indicator::before {
-  content: "";
-  position: absolute;
-  top: 32%;
-  left: -45%;
-  width: 15px;
-  height: 15px;
-  border-top-right-radius: 15px;
-  box-shadow: 0px -7px 0 0 white;
-  transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  z-index: -2;
-}
-ul.m-menu .indicator::after {
-  content: "";
-  position: absolute;
-  top: 32%;
-  right: -45%;
-  width: 15px;
-  height: 15px;
-  border-top-left-radius: 25px;
-  box-shadow: 0px -7px 0 0 white;
-  transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  z-index: -2;
-}
+// ul.m-menu .indicator::before {
+//   content: "";
+//   position: absolute;
+//   top: 32%;
+//   left: -45%;
+//   width: 15px;
+//   height: 15px;
+//   border-top-right-radius: 15px;
+//   box-shadow: 0px -7px 0 0 white;
+//   transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+//   z-index: -2;
+// }
+// ul.m-menu .indicator::after {
+//   content: "";
+//   position: absolute;
+//   top: 32%;
+//   right: -45%;
+//   width: 15px;
+//   height: 15px;
+//   border-top-left-radius: 25px;
+//   box-shadow: 0px -7px 0 0 white;
+//   transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+//   z-index: -2;
+// }
 
 ul.m-menu li.active:nth-child(1) ~ .indicator::before {
   border-top-right-radius: 0px;
@@ -7164,4 +7168,7 @@ ul.m-menu li:nth-child(3).active ~ .indicator {
 }
 ul.m-menu li:nth-child(4).active ~ .indicator {
   transform: translateX(calc(70px * 3));
+}
+ul.m-menu li:nth-child(5).active ~ .indicator {
+  transform: translateX(calc(70px * 4));
 }

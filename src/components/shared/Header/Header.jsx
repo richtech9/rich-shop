@@ -32,7 +32,7 @@ export const Header = () => {
     }
   };
   useEffect(() => {
-    const allpath = ["/", "/shop", "/about", "/profile"];
+    const allpath = ["/", "/shop", "/about", "/profile", "/wishlist"];
     let isPath = false;
     allpath.map((v) => {
       if (v == router.pathname) {
@@ -111,17 +111,27 @@ export const Header = () => {
               <span key={i}>&nbsp;</span>
             ))} */}
             <Link href="/cart">
-              <a>
+              <a
+                style={
+                  "/cart" === router.pathname
+                    ? { fontSize: "24px" }
+                    : { color: "#333", fontSize: "24px" }
+                }
+              >
                 <i className="icon-cart"></i>
-                <span>{cartData.length ?? "0"}</span>
+                <span style={{ fontSize: "14px" }}>
+                  {cartData.length ?? "0"}
+                </span>
               </a>
             </Link>
           </div>
           <div className="bottom-menu">
             <div
               style={{
-                background: "#d05278",
-                borderRadius: "35px",
+                //background: "#d05278",
+                //borderRadius: "35px",
+                boxShadow: "-2px -2px 14px -4px rgba(0,0,0,0.63)",
+                background: "#fff",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -138,13 +148,19 @@ export const Header = () => {
                   className={"/about" === router.pathname ? "active" : ``}
                   onClick={() => router.push("/about")}
                 >
-                  <i class="far fa-info"></i>
+                  <i class="far fa-address-book"></i>
                 </li>
                 <li
                   className={"/shop" === router.pathname ? "active" : ``}
                   onClick={() => router.push("/shop")}
                 >
-                  <i class="far fa-address-book"></i>
+                  <i class="fas fa-store-alt"></i>
+                </li>
+                <li
+                  className={"/wishlist" === router.pathname ? "active" : ``}
+                  onClick={() => router.push("/wishlist")}
+                >
+                  <i class="far fa-heart"></i>
                 </li>
                 <li
                   className={"/profile" === router.pathname ? "active" : ``}
