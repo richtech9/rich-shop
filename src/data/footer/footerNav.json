@@ -14,10 +14,7 @@
         "name": "Shop",
         "path": "/shop"
       },
-      {
-        "name": "Blog",
-        "path": "/blog"
-      },
+      
       {
         "name": "FAQ",
         "path": "/faq"
@@ -72,10 +69,7 @@
         "name": "Terms of use",
         "path": "/about"
       },
-      {
-        "name": "Support",
-        "path": "/blog"
-      },
+      
       {
         "name": "Shipping details",
         "path": "/about"

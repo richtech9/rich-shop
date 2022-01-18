@@ -130,7 +130,7 @@ export const Header = () => {
               style={{
                 //background: "#d05278",
                 //borderRadius: "35px",
-                boxShadow: "-2px -2px 14px -4px rgba(0,0,0,0.63)",
+                boxShadow: "-2px -2px 14px -4px rgba(0,0,0,0.25)",
                 background: "#fff",
                 display: "flex",
                 justifyContent: "center",
@@ -142,33 +142,33 @@ export const Header = () => {
                   className={"/" === router.pathname ? `active` : ``}
                   onClick={() => router.push("/")}
                 >
-                  <i class="far fa-home"></i>
+                  <i className="far fa-home"></i>
                 </li>
                 <li
                   className={"/about" === router.pathname ? "active" : ``}
                   onClick={() => router.push("/about")}
                 >
-                  <i class="far fa-address-book"></i>
+                  <i className="far fa-address-book"></i>
                 </li>
                 <li
                   className={"/shop" === router.pathname ? "active" : ``}
                   onClick={() => router.push("/shop")}
                 >
-                  <i class="fas fa-store-alt"></i>
+                  <i className="fas fa-store-alt"></i>
                 </li>
                 <li
                   className={"/wishlist" === router.pathname ? "active" : ``}
                   onClick={() => router.push("/wishlist")}
                 >
-                  <i class="far fa-heart"></i>
+                  <i className="far fa-heart"></i>
                 </li>
                 <li
                   className={"/profile" === router.pathname ? "active" : ``}
                   onClick={() => router.push("/profile")}
                 >
-                  <i class="far fa-user"></i>
+                  <i className="far fa-user"></i>
                 </li>
-                <div class={path ? "" : "indicator"}></div>
+                <div className={path ? "" : "indicator"}></div>
               </ul>
             </div>
           </div>

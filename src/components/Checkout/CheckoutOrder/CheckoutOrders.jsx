@@ -4,9 +4,9 @@ import { useContext, useEffect, useState } from "react";
 import AppContext from "storeData/AppContext";
 import { Card } from "./Card/Card";
 
-export const CheckoutOrders = ({ dcost, loading }) => {
+export const CheckoutOrders = ({ dcost, loading, discount }) => {
   const { cart } = useContext(CartContext);
-  const [info, setInfo] = useState({ info: 0, total: 0 });
+  const [info, setInfo] = useState({ info: 0, total: 0, discount: 0 });
   const {
     state: { cartData },
   } = useContext(AppContext);
@@ -16,7 +16,7 @@ export const CheckoutOrders = ({ dcost, loading }) => {
       (total, item) => total + Number(item.dicounted_price) * Number(item.qty),
       0
     );
-    setInfo({ dcost, total });
+    setInfo({ dcost, total, discount: discount ? discount : 0 });
   }, [dcost]);
 
   return (
@@ -34,7 +34,7 @@ export const CheckoutOrders = ({ dcost, loading }) => {
         </div>
         <div className="cart-bottom__total-promo">
           Discount on promo code
-          <span>No</span>
+          <span>${discount}</span>
         </div>
         <div className="cart-bottom__total-delivery">
           Delivery Cost
@@ -48,7 +48,7 @@ export const CheckoutOrders = ({ dcost, loading }) => {
         </div>
         <div className="cart-bottom__total-num">
           total:
-          <span>${(info.total + info.dcost).toFixed(2)}</span>
+          <span>${(info.total + info.dcost - info.discount).toFixed(2)}</span>
         </div>
       </div>
     </>

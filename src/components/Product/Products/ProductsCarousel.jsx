@@ -69,20 +69,16 @@ export const ProductsCarousel = ({ products }) => {
   return (
     <>
       <Slider {...settings}>
-        {products.map((product) => {
-          if (product.stock) {
-            return (
-              <SingleProduct
-                addedInCart={Boolean(cart?.find((pd) => pd.id === product.id))}
-                key={product.id}
-                product={product}
-                onAddToWish={addToWhishlist}
-                onAddToCart={handleAddToCart}
-                addedInWish={Boolean(whishlist.find((v) => v.id == product.id))}
-              />
-            );
-          }
-        })}
+        {products.map((product) => (
+          <SingleProduct
+            addedInCart={Boolean(cart?.find((pd) => pd.id === product.id))}
+            key={product.id}
+            product={product}
+            onAddToWish={addToWhishlist}
+            onAddToCart={handleAddToCart}
+            addedInWish={Boolean(whishlist.find((v) => v.id == product.id))}
+          />
+        ))}
       </Slider>
     </>
   );

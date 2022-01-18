@@ -36,7 +36,11 @@ export const Banner = () => {
               key={v.img}
               //style={{ backgroundImage: `url(${v.img})` }}
             >
-              <img src={v.img} alt="slider image" style={{ width: "100%" }} />
+              <img
+                src={v.img}
+                alt="slider image"
+                style={{ width: "100%", height: "100%" }}
+              />
             </div>
           ))}
         </Slider>

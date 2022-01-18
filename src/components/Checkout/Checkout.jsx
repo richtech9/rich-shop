@@ -52,7 +52,7 @@ const Checkout = () => {
   };
 
   const router = useRouter();
-  const { session_id, canceled, aid } = router.query;
+  const { session_id, canceled, aid, discount, pcode } = router.query;
 
   const [loading, setdLoading] = useState({ type: "all", load: true });
   const [fullLoading, setFullloading] = useState(false);
@@ -111,6 +111,7 @@ const Checkout = () => {
         billing_address_id: addressid ? addressid : aid,
         delivery_type: "standard",
         payment_type: online ? "stripe" : "cash_on_delivery",
+        coupon_code: pcode ? pcode : "",
       });
       console.log(res);
       if (res.data.success) {
@@ -251,7 +252,11 @@ const Checkout = () => {
               }
             })()}
             <div className="checkout-info">
-              <CheckoutOrders dcost={dcost} loading={loading} />
+              <CheckoutOrders
+                dcost={dcost}
+                loading={loading}
+                discount={discount}
+              />
             </div>
           </div>
         </div>

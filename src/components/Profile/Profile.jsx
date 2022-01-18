@@ -69,7 +69,7 @@ const Profile = () => {
                     My orders
                   </li>
                   <li
-                    onClick={() => setActiveTab("wishList")}
+                    onClick={() => router.push("/wishlist")}
                     className={activeTab === "wishList" ? "active" : ""}
                   >
                     Wishlist

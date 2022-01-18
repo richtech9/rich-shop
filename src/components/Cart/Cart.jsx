@@ -7,15 +7,18 @@ import AppContext from "storeData/AppContext";
 import { update } from "./updateCart";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 export const Cart = () => {
   const { cart, setCart } = useContext(CartContext);
   const [loading, setLoading] = useState({ load: false });
   const {
-    state: { cartData },
+    state: { cartData, user },
     dispatch,
   } = useContext(AppContext);
   const [count, setCount] = useState(0);
+  const [promoCode, setPromoCode] = useState("");
+  const [discount, setDiscount] = useState(0);
   const socialLinks = [...socialData];
   const router = useRouter();
   const total = cartData.reduce(
@@ -32,6 +35,42 @@ export const Cart = () => {
     if (change === "decrement" && quantity > 1) {
       cart.find((item) => item.id === id).quantity = quantity - 1;
       setCount(count + 1);
+    }
+  };
+
+  const submitPromo = async (e) => {
+    e.preventDefault();
+    if (user) {
+      const cart_item_ids = [];
+      cartData.map((v) => {
+        cart_item_ids.push(v.cart_id);
+      });
+      setLoading({ type: "promo", load: true });
+      const res = await axios.post("checkout/coupon/apply", {
+        coupon_code: promoCode,
+        cart_item_ids,
+      });
+      console.log(res);
+      if (res.data.success) {
+        toast.success(res.data.message);
+        if (res.data.coupon_details.discount_type == "amount") {
+          setDiscount(res.data.coupon_details.discount);
+        } else {
+          const d = res.data.coupon_details.discount / 100;
+          const t = total - total * d;
+          setDiscount(total - t);
+        }
+      } else {
+        toast.warning(res.data.message);
+      }
+
+      setLoading({ type: "promo", load: false });
+    } else {
+      toast.warning("Please Login Frist!");
+      router.push({
+        pathname: "/login",
+        query: { pathname: router.asPath },
+      });
     }
   };
 
@@ -74,17 +113,33 @@ export const Cart = () => {
           </div>
           <div className="cart-bottom">
             <div className="cart-bottom__promo">
-              <form className="cart-bottom__promo-form">
+              <form className="cart-bottom__promo-form" onSubmit={submitPromo}>
                 <div className="box-field__row">
                   <div className="box-field">
                     <input
+                      required
                       type="text"
                       className="form-control"
                       placeholder="Enter promo code"
+                      onChange={(e) => setPromoCode(e.target.value)}
                     />
                   </div>
-                  <button type="submit" className="btn btn-grey">
-                    apply code
+
+                  <button
+                    className="btn btn-grey"
+                    type="submit"
+                    disabled={loading.load}
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    {loading.load && loading.type == "promo" ? (
+                      <img src="/assets/img/icons/loading.gif" width={30} />
+                    ) : (
+                      "apply code"
+                    )}
                   </button>
                 </div>
               </form>
@@ -115,13 +170,13 @@ export const Cart = () => {
               </div>
               <div className="cart-bottom__total-promo">
                 Discount on promo code
-                <span>No</span>
+                <span>${discount}</span>
               </div>
               <div className="cart-bottom__total-num">
                 total:
-                <span>${total.toFixed(2)}</span>
+                <span>${(total - discount).toFixed(2)}</span>
               </div>
-              <Link href="/checkout">
+              <Link href={`/checkout?discount=${discount}&pcode=${promoCode}`}>
                 <a
                   className="btn"
                   onClick={() => {

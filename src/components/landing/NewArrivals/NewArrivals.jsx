@@ -20,7 +20,9 @@ export const NewArrivals = () => {
         />
 
         <div className="products-items">
-          <ProductsCarousel products={allProducts} />
+          {allProducts.length ? (
+            <ProductsCarousel products={allProducts} />
+          ) : null}
         </div>
       </section>
       {/* <!-- NEW ARRIVALS EOF --> */}

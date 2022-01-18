@@ -15,7 +15,7 @@ const update = async (type, payload, curp, dispatch) => {
       if (res.data) {
         if (res.data.success) {
           dispatch(payload);
-          toast.success(res.data.message);
+          //toast.success(res.data.message);
         } else {
           toast.error(res.data.message);
         }

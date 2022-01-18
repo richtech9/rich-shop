@@ -9,6 +9,8 @@ import { toast } from "react-toastify";
 import AppContext from "storeData/AppContext";
 import { add, remove, update } from "components/Cart/updateCart";
 import { CartContext } from "pages/_app";
+import axios from "axios";
+import parse from "html-react-parser";
 
 export const ProductDetails = ({ product, slug }) => {
   const router = useRouter();
@@ -83,6 +85,23 @@ export const ProductDetails = ({ product, slug }) => {
       toast.error("Product Stock Out!");
     }
   }, [currentProduct]);
+
+  const [allReviews, setAllReviews] = useState([]);
+  const [rloading, setrLoading] = useState(false);
+
+  const getReview = async () => {
+    setrLoading(true);
+    const res = await axios.get("product/reviews/" + product.id);
+    if (res.data.success) {
+      console.log(res);
+      setAllReviews(res.data.data);
+    }
+    setrLoading(false);
+  };
+
+  useEffect(() => {
+    getReview();
+  }, []);
 
   if (!product) return <></>;
 
@@ -316,18 +335,17 @@ export const ProductDetails = ({ product, slug }) => {
                 {/* <!-- Product description --> */}
                 {tab === 1 && (
                   <div className="tab-cont">
-                    <p>{product.description}</p>
-                    <p>{product.description}</p>
+                    <p>{parse(product.description)}</p>
                   </div>
                 )}
 
                 {tab === 2 && (
                   <div className="tab-cont product-reviews">
                     {/* <!-- Product Reviews --> */}
-                    {/* <Reviews reviews={product.reviews} /> */}
+                    <Reviews allReviews={allReviews} loading={rloading} />
 
                     {/* <!-- Product Review Form --> */}
-                    <ReviewFrom />
+                    <ReviewFrom pid={product.id} getReview={getReview} />
                   </div>
                 )}
               </div>
