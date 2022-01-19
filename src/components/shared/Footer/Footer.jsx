@@ -34,6 +34,11 @@ export const Footer = () => {
                 <a>
                   <img
                     src={footerLogo}
+                    style={{
+                      background: "#fff",
+                      padding: "10px",
+                      borderRadius: "5px",
+                    }}
                     className="js-img"
                     alt=""
                     width={250}

@@ -64,7 +64,7 @@ export const Header = () => {
           <div className="header-logo">
             <Link href="/">
               <a>
-                <img src={header.logo} alt="" width={240} />
+                <img src={header.logo} alt="" width={190} />
               </a>
             </Link>
           </div>
@@ -127,7 +127,7 @@ export const Header = () => {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    background: "#ff71c8",
+                    background: "#744d2e",
                     fontFamily: '"Montserrat"',
                     fontWeight: "700",
                     fontSize: "12px",
@@ -145,7 +145,7 @@ export const Header = () => {
           <div className="bottom-menu">
             <div
               style={{
-                //background: "#ff71c8",
+                //background: "#744d2e",
                 //borderRadius: "35px",
                 boxShadow: "-2px -2px 14px -4px rgba(0,0,0,0.25)",
                 background: "#fff",
@@ -159,14 +159,14 @@ export const Header = () => {
                   className={"/about" === router.pathname ? "active" : ``}
                   onClick={() => router.push("/about")}
                 >
-                  <i class="fal fa-users"></i>
+                  <i className="fal fa-users"></i>
                 </li>
 
                 <li
                   className={"/shop" === router.pathname ? "active" : ``}
                   onClick={() => router.push("/shop")}
                 >
-                  <i class="far fa-store"></i>
+                  <i className="far fa-store"></i>
                 </li>
                 <li
                   className={"/" === router.pathname ? `active` : ``}

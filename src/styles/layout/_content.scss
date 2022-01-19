@@ -183,7 +183,7 @@ h6,
 
 .saint-text {
   font-family: "Mrs Saint Delafield";
-  color: #ff71c8;
+  color: #744d2e;
   display: block;
   font-size: 50px;
   text-transform: capitalize;
@@ -198,7 +198,7 @@ h6,
   margin-top: 4px;
 
   span {
-    color: #ff71c8;
+    color: #744d2e;
     position: relative;
 
     &:before {
@@ -330,7 +330,7 @@ h6,
 
       &.active {
         a {
-          background: #ff71c8;
+          background: #744d2e;
           color: #ffffff;
         }
       }
@@ -418,7 +418,7 @@ h6,
           font-size: 20px;
 
           &.fas fa-shopping-bag {
-            background: #ff71c8;
+            background: #744d2e;
             color: #fff;
           }
 
@@ -427,7 +427,7 @@ h6,
           }
 
           &.active {
-            background: #ff71c8;
+            background: #744d2e;
             color: #fff;
           }
         }
@@ -1050,7 +1050,7 @@ h6,
     // overflow: hidden;
     // text-transform: capitalize;
     &:hover {
-      color: #ff71c8;
+      color: #744d2e;
     }
   }
 
@@ -1300,7 +1300,7 @@ h6,
     margin: 0 13px;
     font-size: 16px;
     line-height: 170%;
-    color: #ff71c8;
+    color: #744d2e;
     position: relative;
 
     &:after {
@@ -1316,7 +1316,7 @@ h6,
       color: #666666;
 
       &:hover {
-        color: #ff71c8;
+        color: #744d2e;
       }
     }
 
@@ -1383,7 +1383,7 @@ h6,
       font-size: 54px;
       line-height: 100%;
       text-transform: capitalize;
-      color: #ff71c8;
+      color: #744d2e;
       display: block;
       margin-bottom: 42px;
       z-index: 1;
@@ -1804,7 +1804,7 @@ h6,
       }
 
       .faq-item__head {
-        color: #ff71c8;
+        color: #744d2e;
       }
 
       .faq-item__head-btn {
@@ -2350,7 +2350,7 @@ blockquote,
 
 .blockquote-author {
   display: block;
-  color: #ff71c8;
+  color: #744d2e;
   text-transform: capitalize;
   font-size: 24px;
   line-height: 100%;
@@ -2450,11 +2450,11 @@ blockquote,
             }
 
             &:hover {
-              color: #ff71c8;
-              border-color: #ff71c8;
+              color: #744d2e;
+              border-color: #744d2e;
 
               span {
-                color: #ff71c8;
+                color: #744d2e;
               }
             }
           }
@@ -2465,22 +2465,22 @@ blockquote,
         margin-bottom: 123px;
 
         .rc-slider-handle {
-          border: solid 2px #ff71c8;
-          background-color: #ff71c8;
+          border: solid 2px #744d2e;
+          background-color: #744d2e;
 
           &:hover {
-            border-color: #ff71c8;
+            border-color: #744d2e;
             cursor: pointer;
           }
         }
 
         .rc-slider-handle:active {
-          border-color: #ff71c8;
-          box-shadow: 0 0 5px #ff71c8;
+          border-color: #744d2e;
+          box-shadow: 0 0 5px #744d2e;
         }
 
         .rc-slider-track {
-          background-color: #ff71c8;
+          background-color: #744d2e;
         }
 
         .rc-slider-tooltip-hidden {
@@ -2540,7 +2540,7 @@ blockquote,
 
         &:hover {
           .shop-aside__item-product-title {
-            color: #ff71c8;
+            color: #744d2e;
           }
         }
       }
@@ -2638,13 +2638,13 @@ blockquote,
 
   .irs-bar {
     height: 3px;
-    background-color: #ff71c8;
+    background-color: #744d2e;
   }
 
   .irs-handle {
-    background-color: #ff71c8;
+    background-color: #744d2e;
     box-shadow: none;
-    border-color: #ff71c8;
+    border-color: #744d2e;
     width: 15px;
     height: 15px;
     top: 30px;
@@ -2652,7 +2652,7 @@ blockquote,
 
     &:hover,
     &.state_hover {
-      background-color: #ff71c8;
+      background-color: #744d2e;
     }
   }
 
@@ -2724,7 +2724,7 @@ blockquote,
 }
 
 .checkbox-box input:checked ~ .checkmark {
-  background-color: #ff71c8;
+  background-color: #744d2e;
 }
 
 .checkmark:after {
@@ -2801,7 +2801,7 @@ blockquote,
 
       &.sel {
         background-color: #fff;
-        color: #ff71c8;
+        color: #744d2e;
       }
     }
   }
@@ -2874,7 +2874,7 @@ blockquote,
         }
 
         &.slick-current {
-          border: 2px solid #ff71c8;
+          border: 2px solid #744d2e;
 
           &:hover {
             &:after {
@@ -2886,7 +2886,7 @@ blockquote,
 
       & .slick-current {
         & img {
-          border: 2px solid #ff71c8;
+          border: 2px solid #744d2e;
         }
       }
     }
@@ -2970,7 +2970,7 @@ blockquote,
 
         &:hover,
         &.active {
-          border: 2px solid #ff71c8;
+          border: 2px solid #744d2e;
         }
       }
     }
@@ -3081,8 +3081,8 @@ blockquote,
 
     &.active {
       // a {
-      background: #ff71c8;
-      border-color: #ff71c8;
+      background: #744d2e;
+      border-color: #744d2e;
       color: #ffffff;
     }
   }
@@ -3314,7 +3314,7 @@ blockquote,
 
       .title5 {
         &:hover {
-          color: #ff71c8;
+          color: #744d2e;
         }
       }
 
@@ -3777,7 +3777,7 @@ blockquote,
           }
 
           &:hover {
-            color: #ff71c8;
+            color: #744d2e;
           }
         }
       }
@@ -3984,7 +3984,7 @@ blockquote,
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #ff71c8;
+  background: #744d2e;
 }
 
 .checkout-purchase {
@@ -4020,7 +4020,7 @@ blockquote,
     font-size: 14px;
     line-height: 170%;
     text-transform: uppercase;
-    color: #ff71c8;
+    color: #744d2e;
     display: block;
 
     &:hover {
@@ -4141,7 +4141,7 @@ blockquote,
       }
 
       a {
-        color: #ff71c8;
+        color: #744d2e;
         cursor: pointer;
 
         &:hover {
@@ -4358,7 +4358,7 @@ input[type="search"]::-webkit-search-results-decoration {
           color: #222222;
 
           &:hover {
-            color: #ff71c8;
+            color: #744d2e;
           }
         }
 
@@ -4387,7 +4387,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
         span {
           font-size: 60px;
-          color: #ff71c8;
+          color: #744d2e;
           position: relative;
           display: inline-block;
           margin-top: 16px;
@@ -4586,7 +4586,7 @@ input[type="search"]::-webkit-search-results-decoration {
           font-size: 12px;
           line-height: 170%;
           text-transform: uppercase;
-          color: #ff71c8;
+          color: #744d2e;
         }
 
         &-delivered {
@@ -4615,7 +4615,7 @@ input[type="search"]::-webkit-search-results-decoration {
           }
 
           &:after {
-            background: #ff71c8;
+            background: #744d2e;
           }
         }
       }
@@ -4718,7 +4718,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
     &.is-selected {
       background-color: #fff;
-      color: #ff71c8;
+      color: #744d2e;
     }
 
     &:hover {
@@ -7116,13 +7116,13 @@ ul.m-menu .indicator {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #ff3780;
+  background: #e2b759;
   position: absolute;
   top: -14px;
   left: 20px;
   z-index: -1;
   transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  border: 3px solid #ff71c8;
+  border: 3px solid #744d2e;
 }
 // ul.m-menu .indicator::before {
 //   content: "";
@@ -7177,6 +7177,6 @@ ul.m-menu li:nth-child(5).active ~ .indicator {
   transform: translateX(calc(70px * 4));
 }
 .shop-aside__item ul li a.active {
-  color: #ff71c8;
-  border-color: #ff71c8;
+  color: #744d2e;
+  border-color: #744d2e;
 }
