@@ -6,6 +6,10 @@
     "build": "next build",
     "start": "next start"
   },
+  "engines" : { 
+    "node" : "14.17.5",
+    "npm" : "8.1.4"
+  },
   "dependencies": {
     "@stripe/stripe-js": "^1.22.0",
     "axios": "^0.24.0",
