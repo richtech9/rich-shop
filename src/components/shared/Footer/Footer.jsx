@@ -42,7 +42,7 @@ export const Footer = () => {
                     className="js-img"
                     alt=""
                     width={250}
-                    height={50}
+                    //height={50}
                   />
                 </a>
               </Link>

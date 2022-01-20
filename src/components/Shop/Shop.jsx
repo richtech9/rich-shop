@@ -27,6 +27,8 @@ export const Shop = () => {
   const [products, setProducts] = useState([]);
   const [filter, setFilter] = useState({ isNew: false, isSale: true });
   const [filterItem, setFilterItem] = useState(null);
+  const [sText, setsText] = useState("");
+
   useEffect(() => {
     if (filterItem) {
       const newItems = allProducts.filter((pd) =>
@@ -69,6 +71,17 @@ export const Shop = () => {
     }
   };
 
+  const getsValue = async (e) => {
+    const product = [];
+    allProducts.map((v) => {
+      if (v.name.toLowerCase().includes(e.target.value.toLowerCase())) {
+        product.push(v);
+      }
+    });
+
+    setProducts(product);
+  };
+
   return (
     <div>
       {/* <!-- BEGIN SHOP --> */}
@@ -79,11 +92,17 @@ export const Shop = () => {
             <div className="shop-aside">
               <div className="box-field box-field__search">
                 <input
+                  //onChange={(e) => setsText(e.target.value.toLowerCase())}
+                  onChange={getsValue}
                   type="search"
                   className="form-control"
                   placeholder="Search"
                 />
-                <i className="icon-search"></i>
+                <i
+                  className="icon-search"
+                  //onClick={getsValue}
+                  style={{ cursor: "pointer" }}
+                ></i>
               </div>
               <div className="shop-aside__item">
                 <span className="shop-aside__item-title">Categories</span>

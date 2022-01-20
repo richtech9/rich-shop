@@ -13,6 +13,7 @@ export const Header = () => {
   } = useContext(AppContext);
   const [promo, setPromo] = useState(true);
   const [path, setPath] = useState(false);
+  const [currentPath, setCurrentPath] = useState("/");
   const [fixedNav, setFixedNav] = useState(false);
   const router = useRouter();
   // For Fixed nav
@@ -46,6 +47,10 @@ export const Header = () => {
       setPath(true);
     }
   });
+
+  useEffect(() => {
+    setCurrentPath(router.pathname);
+  }, [router.pathname]);
   return (
     <>
       {/* <!-- BEGIN HEADER --> */}
@@ -156,33 +161,48 @@ export const Header = () => {
             >
               <ul className="m-menu">
                 <li
-                  className={"/about" === router.pathname ? "active" : ``}
-                  onClick={() => router.push("/about")}
+                  className={"/about" === currentPath ? "active" : ``}
+                  onClick={() => {
+                    router.push("/about");
+                    setCurrentPath("/about");
+                  }}
                 >
                   <i className="fal fa-users"></i>
                 </li>
 
                 <li
-                  className={"/shop" === router.pathname ? "active" : ``}
-                  onClick={() => router.push("/shop")}
+                  className={"/shop" === currentPath ? "active" : ``}
+                  onClick={() => {
+                    router.push("/shop");
+                    setCurrentPath("/shop");
+                  }}
                 >
                   <i className="far fa-store"></i>
                 </li>
                 <li
-                  className={"/" === router.pathname ? `active` : ``}
-                  onClick={() => router.push("/")}
+                  className={"/" === currentPath ? `active` : ``}
+                  onClick={() => {
+                    router.push("/");
+                    setCurrentPath("/");
+                  }}
                 >
                   <i className="far fa-home"></i>
                 </li>
                 <li
-                  className={"/wishlist" === router.pathname ? "active" : ``}
-                  onClick={() => router.push("/wishlist")}
+                  className={"/wishlist" === currentPath ? "active" : ``}
+                  onClick={() => {
+                    router.push("/wishlist");
+                    setCurrentPath("/wishlist");
+                  }}
                 >
                   <i className="far fa-heart"></i>
                 </li>
                 <li
-                  className={"/profile" === router.pathname ? "active" : ``}
-                  onClick={() => router.push("/profile")}
+                  className={"/profile" === currentPath ? "active" : ``}
+                  onClick={() => {
+                    router.push("/profile");
+                    setCurrentPath("/profile");
+                  }}
                 >
                   <i className="far fa-user"></i>
                 </li>
