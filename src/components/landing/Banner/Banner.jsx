@@ -5,9 +5,14 @@ import Slider from "react-slick";
 export const Banner = () => {
   const [sliders, setSliders] = useState([]);
   const getSlider = async () => {
-    const res = await axios.get("setting/home/sliders");
-    if (res.data.success) {
-      setSliders(res.data.data.one);
+    try {
+      const res = await axios.get("setting/home/sliders");
+      
+      if (res.data.success) {
+        setSliders(res.data.data.one);
+      }
+    } catch {
+      
     }
   };
 
