@@ -1,8 +1,6 @@
-# Beshop Next App
+# RichShop Next App
 
 ## Preview
-
-Preview the example live on [Beshop](https://beshop-front.vercel.app/):
 
 ```
 Run production build with:
@@ -14,4 +12,5 @@ npm run start
 yarn build
 yarn start
 ```
-# beauty-shop
+
+# rich-shop
